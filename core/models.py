@@ -26,6 +26,8 @@ class Performer(models.Model):
     performer_rating = models.ForeignKey('PerformerRating', on_delete=models.SET_NULL)
     tasks = models.ForeignKey('Tasks', on_delete=models.PROTECT)
     registration_date = models.DateField(auto_now=True, verbose_name="Дата регистрации")
+    phone = models.CharField(max_length=13, verbose_name="Номер телефона")
+    email = models.EmailField(verbose_name="Почта")
 
 
 class Customer(models.Model):
@@ -34,4 +36,12 @@ class Customer(models.Model):
     customer_rating = models.ForeignKey('CustomerRating', on_delete=models.SET_NULL)
     tasks = models.ForeignKey('Tasks', on_delete=models.PROTECT)
     registration_date = models.DateField(auto_now=True, verbose_name="Дата регистрации")
+    phone = models.CharField(max_length=13, verbose_name="Номер телефона")
+    email = models.EmailField(verbose_name="Почта")
 
+
+# Метрики для заказчика
+class CustomerRating(models.Model):
+    attitude = models.DecimalField(decimal_places=2, max_digits=1)
+    task_literacy = models.DecimalField(decimal_places=2, max_digits=1)
+    payment_
