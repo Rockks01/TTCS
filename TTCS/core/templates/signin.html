@@ -1,0 +1,54 @@
+{% extends 'base_index.html' %}
+{% block title%}TTCS{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">TTCS</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Главная</a>
+              </li>
+            </ul>
+            <div>
+                <span>Нет аккаунта?</span>
+                <a href="/signup" class="link-primary">Зарегистрироваться</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container py-5 container-fluid" style="background-color: white;" name="login-container">
+        <h2 class="mb-4"><span class="badge bg-dark">LogIn</span></h2>
+        <form method="post" action="" onsubmit="remove_message();">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="login" class="form-control" id="exampleInputLogin" name="username" placeholder="Your username">
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="password" class="form-control" id="exampleInputPassword" name="password" placeholder="Your password">
+            </div>
+            <br>
+            {% if message %}
+                <div id="message" class="alert alert-warning" role="alert">{{message}}</div>
+            {% endif %}
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="submit" class="btn btn-primary w-100" name="login-button"">Войти</button>
+                </div>
+                &nbsp;
+            </div>
+            <br>
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+            <div class="g-recaptcha" data-sitekey="{{GOOGLE_RECAPTCHA_PUBLIC_KEY}}"></div>
+        </form>
+        <br>
+        <!--<small id="emailHelp" class="form-text text-muted">Do not share your username and password third parties.</small>-->
+        </div>
+    </div>
+{% endblock %}

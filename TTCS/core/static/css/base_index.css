@@ -1,0 +1,11 @@
+body {
+    background-color: #285a6f;
+}
+
+span{
+    color: grey;
+}
+
+.container[name="login-container"]{
+    width: 350px;
+}
