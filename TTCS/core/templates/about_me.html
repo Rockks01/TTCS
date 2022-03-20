@@ -58,6 +58,89 @@
                     </form>
                 </div>
             </p>
+            <p>
+              <form action="/change_description" method="post">
+                {% csrf_token %}
+                <p>
+                    <div class="input-group">
+                        <span class="input-group-text">О себе</span>
+                        <textarea class="form-control" aria-label="With textarea" name="description">{{user.description}}</textarea>
+                    </div>
+                </p>
+                <p><button type="submit" class="btn btn-primary w-100">Сохранить</button></p>
+              </form>
+            </p>
+            <h6>Статистика</h6>
+            <p>
+                {% if user.is_customer %}
+                    <span class="badge bg-secondary w-100">
+                        Составление требованиий:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Приятный диалог:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Процесс оплаты:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Корректные сроки:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                {% else %}
+                    <span class="badge bg-secondary w-100">
+                        Качество работы:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Скорость  работы:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Приятный диалог:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                    <span class="badge bg-secondary w-100">
+                        Работа в команде:
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star"></i>
+                    </span>
+                {% endif %}
+            </p>
           </div>
         </div>
     </div>

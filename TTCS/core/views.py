@@ -121,6 +121,16 @@ class Web:
         else:
             return redirect("index")
 
+    def change_description(request):
+        if request.user.is_authenticated:
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
+            description = request.POST["description"]
+            CustomUser.objects.filter(pk=user_id).update(description=description)
+            return redirect("about_me")
+        else:
+            return redirect("index")
+
 def handler505(request):
     type_, value, traceback = sys.exc_info()
     data: dict = dict(value=value)

@@ -11,7 +11,8 @@ urlpatterns = [
     path("tasks", Web.tasks, name="tasks"),
     path("rating", Web.rating, name="rating"),
     path("about_me", Web.about_me, name="about_me"),
-    path("change_status", Web.change_status, name="change_status")
+    path("change_status", Web.change_status, name="change_status"),
+    path("change_description", Web.change_description, name="change_description")
 ]
 
 handler505 = "core.views"
