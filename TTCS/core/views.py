@@ -74,9 +74,9 @@ class Web:
             user_id = request.session["_auth_user_id"]
             user = CustomUser.objects.filter(pk=user_id).get()
             if user.is_customer:
-                return render(request, "customer/profile.html")
+                return render(request, "customer/profile.html", dict(user=user))
             else:
-                return render(request, "employer/profile.html")
+                return render(request, "employer/profile.html", dict(user=user))
         else:
             return redirect("index")
 
@@ -89,16 +89,18 @@ class Web:
             user_id = request.session["_auth_user_id"]
             user = CustomUser.objects.filter(pk=user_id).get()
             if user.is_customer:
-                return render(request, "customer/tasks.html")
+                return render(request, "customer/tasks.html", dict(user=user))
             else:
-                return render(request, "employer/tasks.html")
+                return render(request, "employer/tasks.html", dict(user=user))
         else:
             return redirect("index")
 
     def rating(request):
         if request.user.is_authenticated:
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
             users = CustomUser.objects.all()
-            return render(request, "rating.html", dict(users=users))
+            return render(request, "rating.html", dict(user=user, users=users))
         else:
             return redirect("index")
 
