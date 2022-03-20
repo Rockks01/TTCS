@@ -1,5 +1,7 @@
 body {
-  background-color: #eee
+  background-color: #eee;
+  overflow-x: hidden;
+  
 }
 
 .nav-link:hover {
@@ -12,4 +14,12 @@ body {
 
 .nav-link:hover .fa {
   transform: rotate(360deg)
+}
+
+.input-group-text{
+  font-weight: bold;
+}
+
+.col{
+  width: 425px;
 }

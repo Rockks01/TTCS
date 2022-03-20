@@ -38,6 +38,12 @@
                 <input type="password" class="form-control" id="exampleInputPassword" name="password" placeholder="Ваш пароль">
             </div>
             <br>
+            <select name="status" class="form-select" aria-label="Default select example">
+                <option selected>Выберите статус</option>
+                <option value="1">Заказчик</option>
+                <option value="2">Исполнитель</option>
+            </select>
+            <br>
             {% if message %}
                 <div id="message" class="alert alert-warning" role="alert">{{message}}</div>
             {% endif %}

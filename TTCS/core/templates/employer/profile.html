@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block title%}TTCS{% endblock %}
+
+{% load static %}
+{% block body %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white bg-dark" style="width: 250px;"> <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> <svg class="bi me-2" width="40" height="32"> </svg> <span class="fs-4">TTCS</span> </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"> <a href="/" class="nav-link active" aria-current="page"> <i class="bi bi-house"></i><span class="ms-2">Главная</span> </a> </li>
+            <li> <a href="/tasks" class="nav-link text-white"> <i class="bi bi-table"></i><span class="ms-2">Задания</span> </a> </li>
+            <li> <a href="/rating" class="nav-link text-white"> <i class="bi bi-graph-up-arrow"></i><span class="ms-2">Рейтинг</span> </a> </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{% static 'images/user_icon.png'%}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong> Top Programmer </strong> </a>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="/about_me"><i class="bi bi-info-circle"></i> Профиль</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-in-left"></i> Выйти</a></li>
+            </ul>
+        </div>
+        <p><span class="badge bg-success w-100">Исполнитель</span></p>
+    </div>
+</div>
+{% endblock %}

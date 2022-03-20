@@ -9,7 +9,9 @@ urlpatterns = [
     path("logout", Web.logout_user, name="logout_user"),
 
     path("tasks", Web.tasks, name="tasks"),
-    path("rating", Web.rating, name="rating")
+    path("rating", Web.rating, name="rating"),
+    path("about_me", Web.about_me, name="about_me"),
+    path("change_status", Web.change_status, name="change_status")
 ]
 
 handler505 = "core.views"

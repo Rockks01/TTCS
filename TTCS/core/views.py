@@ -41,9 +41,11 @@ class Web:
         if not request.user.is_authenticated:
             data: dict = dict()
             if "register-button" in request.POST:
+                print(request.POST)
                 username: str = request.POST["username"]
                 email: str = request.POST["email"]
                 password: str = request.POST["password"]
+                status: int = int(request.POST["status"])
 
                 if not username or not email or not password:
                     message: str = "Поля не должны оставаться пустыми!" # Set message.
@@ -52,7 +54,12 @@ class Web:
                     hash_password: str = hashlib.md5(password.encode("utf-8")).hexdigest() # Convert password to md5 hash.
                     user = CustomUser.objects.filter(username=username).exists() # Check user.
                     if not user:
-                        user = CustomUser.objects.create(username=username, email=email, password=hash_password, is_staff=False) # Create new user.
+                        if status == 1:
+                            is_customer, is_employer = True, False
+                        elif status == 2:
+                            is_customer, is_employer = False, True
+                        user = CustomUser.objects.create(username=username, email=email, password=hash_password, is_staff=False,
+                            is_customer=is_customer, is_employer=is_employer) # Create new user.
                         login(request, user) # Auth user in the system.
                         return redirect("profile") # Redirect to 'profile' page.
                     else:
@@ -64,19 +71,53 @@ class Web:
 
     def profile(request):
         if request.user.is_authenticated:
-            return render(request, "profile.html")
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
+            if user.is_customer:
+                return render(request, "customer/profile.html")
+            else:
+                return render(request, "employer/profile.html")
         else:
-            return redirect("profile")
+            return redirect("index")
 
     def logout_user(request):
         logout(request)
         return redirect("index")
 
     def tasks(request):
-        return render(request, "tasks.html")
+        if request.user.is_authenticated:
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
+            if user.is_customer:
+                return render(request, "customer/tasks.html")
+            else:
+                return render(request, "employer/tasks.html")
+        else:
+            return redirect("index")
 
     def rating(request):
-        return render(request, "rating.html")
+        if request.user.is_authenticated:
+            users = CustomUser.objects.all()
+            return render(request, "rating.html", dict(users=users))
+        else:
+            return redirect("index")
+
+    def about_me(request):
+        if request.user.is_authenticated:
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
+            return render(request, "about_me.html", dict(user=user))
+        else:
+            return redirect("index")
+
+    def change_status(request):
+        if request.user.is_authenticated:
+            user_id = request.session["_auth_user_id"]
+            user = CustomUser.objects.filter(pk=user_id).get()
+            CustomUser.objects.filter(pk=user_id).update(is_customer=user.is_employer, is_employer=user.is_customer)
+            return redirect("about_me")
+        else:
+            return redirect("index")
 
 def handler505(request):
     type_, value, traceback = sys.exc_info()
